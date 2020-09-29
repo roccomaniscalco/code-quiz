@@ -1,3 +1,12 @@
+button{
+    background-color: #489048;
+    border-style: none;
+    font-size: 30px;
+    padding: 10px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+}
+
 p{
     color: #D0D0D0;
     font-size: 30px;
@@ -29,14 +38,4 @@ p{
     margin: auto;
     width: 70%;
     padding: 10px;
-}
-
-button{
-    background-color: #489048;
-    border-style: none;
-    font-size: 30px;
-    padding: 10px;
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: bold;
-
 }
