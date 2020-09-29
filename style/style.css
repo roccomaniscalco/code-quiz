@@ -3,6 +3,7 @@ button{
     border-style: none;
     font-size: 30px;
     padding: 10px;
+    margin: 20px;
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
 }
@@ -38,4 +39,8 @@ p{
     margin: auto;
     width: 70%;
     padding: 10px;
+}
+
+.block{
+    display: block;
 }
