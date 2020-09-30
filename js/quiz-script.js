@@ -11,8 +11,8 @@ var answerChoices = [
 var correctAnswers = ["me", "ya", "here"];
 
 setRandomIndex();
-displayAnswers();
 displayQuestion();
+displayAnswers();
 
 function setRandomIndex() {
   randomIndex = Math.floor(Math.random() * questions.length);
@@ -23,7 +23,7 @@ function displayQuestion() {
 
   question.setAttribute("class", "heading");
   question.textContent = questions[randomIndex];
-  quizSection.prepend(question);
+  quizSection.append(question);
 }
 
 function displayAnswers() {
@@ -34,7 +34,7 @@ function displayAnswers() {
     var answer = document.createElement("button");
     answer.setAttribute("class", "block");
     answer.textContent = answers[i];
-    quizSection.prepend(answer);
+    quizSection.append(answer);
   }
 }
 
@@ -54,8 +54,8 @@ quizSection.addEventListener("click", function (event) {
   quizSection.innerHTML = "";
 
   setRandomIndex();
-  displayAnswers();
   displayQuestion();
+  displayAnswers();
 
   quizSection.append(feedback);
   setTimeout(() => {
