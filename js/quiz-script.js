@@ -1,6 +1,6 @@
 // initializes DOM variables
+var scoreButt = document.querySelector('[name="score-butt"]')
 var quizSection = document.querySelector('[name="quiz-section"]');
-var quizHeader = document.querySelector('[name="quiz-header"]');
 
 // initializes global variables
 var questionsAnswered = 0;
@@ -53,17 +53,16 @@ function displayCompletion() {
   finalScoreMessage.textContent = "Your score: "; //*********//
   quizSection.append(finalScoreMessage);
 
-  var initialsForm = document.createElement("form");
-  var initialsInput = document.createElement("input");
-  var initialsLabel = document.createElement("label");
-  var initialsSubmit = document.createElement("input");
+  var nameForm = document.createElement("form");
+  var nameInput = document.createElement("input");
+  var nameSubmit = document.createElement("input");
 
-  initialsForm.setAttribute("action","./score.html")
-  initialsLabel.textContent = "Enter initials: "
-  initialsSubmit.setAttribute("type", "submit");
+  nameForm.setAttribute("action","./score.html")
+  nameInput.setAttribute("placeholder", "name");
+  nameSubmit.setAttribute("type", "submit");
 
-  initialsForm.append(initialsLabel, initialsInput, initialsSubmit);
-  quizSection.append(initialsForm);
+  nameForm.append(nameInput, nameSubmit);
+  quizSection.append(nameForm);
 }
 
 // upon clicking an answer button...
@@ -94,7 +93,12 @@ quizSection.addEventListener("click", function (event) {
     // displays feedback caption
     quizSection.append(feedback);
     setTimeout(() => {
-      quizSection.removeChild(feedback);
-    }, 1000);
+      if(quizSection.contains(feedback))
+        quizSection.removeChild(feedback);
+    }, 2000);
   }
+});
+
+scoreButt.addEventListener("click", function () {
+  window.location.href = "./score.html";
 });
