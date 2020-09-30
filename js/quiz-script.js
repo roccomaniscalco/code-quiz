@@ -1,8 +1,10 @@
 // initializes DOM variables
-var scoreButt = document.querySelector('[name="score-butt"]')
+var scoreButt = document.querySelector('[name="score-butt"]');
 var quizSection = document.querySelector('[name="quiz-section"]');
+var timeSpan = document.querySelector('[name="time-span"]');
 
 // initializes global variables
+var time = 75;
 var questionsAnswered = 0;
 var randomIndex;
 var questions = ["how", "who", "what", "why"];
@@ -13,6 +15,17 @@ var arrOfAnswerChoices = [
   ["because", "cause", "cus"],
 ];
 var correctAnswers = ["me", "ya", "here", "because"];
+
+// sets timeSpan and decrements time by the second
+var interval = setInterval(function () {
+  time--;
+  timeSpan.textContent = "Time: " + time;
+
+  if (time == 0) {
+    clearQuizSection();
+    displayCompletion();
+  }
+}, 1000);
 
 // loads new question and answers
 setRandomIndex();
@@ -36,28 +49,30 @@ function displayAnswers() {
   var answerChoices = arrOfAnswerChoices[randomIndex];
 
   for (var i = 0; i < answerChoices.length; i++) {
-    var answer = document.createElement("button");
-    answer.setAttribute("class", "block");
-    answer.textContent = answerChoices[i];
-    quizSection.append(answer);
+    var answerChoice = document.createElement("button");
+    answerChoice.setAttribute("class", "block");
+    answerChoice.textContent = answerChoices[i];
+    quizSection.append(answerChoice);
   }
 }
 
-// displays quiz completion
+// displays quiz completion and clears interval
 function displayCompletion() {
+  clearInterval(interval);
+
   var completionMessage = document.createElement("h1");
   completionMessage.textContent = "All done!";
   quizSection.append(completionMessage);
 
   var finalScoreMessage = document.createElement("p");
-  finalScoreMessage.textContent = "Your score: "; //*********//
+  finalScoreMessage.textContent = "Your score: " + time;
   quizSection.append(finalScoreMessage);
 
   var nameForm = document.createElement("form");
   var nameInput = document.createElement("input");
   var nameSubmit = document.createElement("input");
 
-  nameForm.setAttribute("action","./score.html")
+  nameForm.setAttribute("action", "./score.html");
   nameInput.setAttribute("placeholder", "name");
   nameSubmit.setAttribute("type", "submit");
 
@@ -65,26 +80,37 @@ function displayCompletion() {
   quizSection.append(nameForm);
 }
 
-// upon clicking an answer button...
+// removes used question, answers, and correct answer and clears quizSection
+function clearQuizSection() {
+  questions.splice(randomIndex, 1);
+  arrOfAnswerChoices.splice(randomIndex, 1);
+  correctAnswers.splice(randomIndex, 1);
+  quizSection.innerHTML = "";
+}
+
+// upon clicking an answerChoice...
 quizSection.addEventListener("click", function (event) {
   if (event.target.matches("button")) {
-    
-    // defines feedback caption ("Correct!" or "Wrong!")
+    // defines feedback caption and penalizes time
     var feedback = document.createElement("caption");
     if (event.target.textContent === correctAnswers[randomIndex])
       feedback.textContent = "Correct!";
-    else feedback.textContent = "Wrong!";
+    else {
+      feedback.textContent = "Wrong!";
+      time -= 10;
+      if (time <= 0) time = 0;
+      timeSpan.textContent = "Time: " + time;
+      if (time == 0) displayCompletion();
+    }
 
-    // removes used question, answers, and correct answer and clears quizSection
-    questions.splice(randomIndex, 1);
-    arrOfAnswerChoices.splice(randomIndex, 1);
-    correctAnswers.splice(randomIndex, 1);
-    quizSection.innerHTML = "";
+    clearQuizSection();
 
     // displays quiz completion or loads new question and answers
     questionsAnswered++;
-    if (questionsAnswered === 3) displayCompletion(); //*********//
-    else {
+    if (questionsAnswered === 3) {
+      //*********//
+      displayCompletion();
+    } else {
       setRandomIndex();
       displayQuestion();
       displayAnswers();
@@ -93,12 +119,12 @@ quizSection.addEventListener("click", function (event) {
     // displays feedback caption
     quizSection.append(feedback);
     setTimeout(() => {
-      if(quizSection.contains(feedback))
-        quizSection.removeChild(feedback);
+      if (quizSection.contains(feedback)) quizSection.removeChild(feedback);
     }, 2000);
   }
 });
 
+// upon clicking View 'Highscores'...
 scoreButt.addEventListener("click", function () {
   window.location.href = "./score.html";
 });

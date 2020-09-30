@@ -33,6 +33,13 @@ h1 {
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
+span {
+  color: #d0d0d0;
+  font-size: 30px;
+  font-family: "Courier New", Courier, monospace;
+  float: right;
+}
+
 input {
   background-color: #171717;
   color: #d0d0d0;
