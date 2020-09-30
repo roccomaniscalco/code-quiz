@@ -47,6 +47,10 @@ quizSection.addEventListener("click", function (event) {
     else feedback.textContent = "Wrong!";
   }
 
+  questions.splice(randomIndex,1)
+  answerChoices.splice(randomIndex,1)
+  correctAnswers.splice(randomIndex,1)
+
   quizSection.innerHTML = "";
 
   setRandomIndex();
