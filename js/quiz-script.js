@@ -78,6 +78,11 @@ function displayCompletion() {
 
   nameForm.append(nameInput, nameSubmit);
   quizSection.append(nameForm);
+
+  nameForm.onsubmit = function(){
+    localStorage.setItem("storedName",nameInput.value);
+    localStorage.setItem("storedTime",time);
+  }
 }
 
 // removes used question, answers, and correct answer and clears quizSection
@@ -126,5 +131,5 @@ quizSection.addEventListener("click", function (event) {
 
 // upon clicking View 'Highscores'...
 scoreButt.addEventListener("click", function () {
-  window.location.href = "./score.html";
+  location.href = "./score.html";
 });

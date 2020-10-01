@@ -4,10 +4,10 @@ var startButt = document.querySelector('[name="start-butt"]');
 
 // upon clicking 'Start'...
 startButt.addEventListener("click", function () {
-  window.location.href = "./quiz.html";
+  location.href = "./quiz.html";
 });
 
 // upon clicking View 'Highscores'...
 scoreButt.addEventListener("click", function () {
-  window.location.href = "./score.html";
+  location.href = "./score.html";
 });

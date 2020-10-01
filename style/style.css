@@ -69,6 +69,12 @@ caption {
   font-family: "Courier New", Courier, monospace;
 }
 
+li {
+  color: #d0d0d0;
+  font-size: 30px;
+  font-family: "Courier New", Courier, monospace;
+}
+
 .background {
   background-color: #171717;
 }
