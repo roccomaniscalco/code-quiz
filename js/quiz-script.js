@@ -7,14 +7,37 @@ var timeSpan = document.querySelector('[name="time-span"]');
 var time = 75;
 var questionsAnswered = 0;
 var randomIndex;
-var questions = ["how", "who", "what", "why"];
-var arrOfAnswerChoices = [
-  ["me", "him", "her"],
-  ["ya", "ye", "yo"],
-  ["here", "there", "everywhere"],
-  ["because", "cause", "cus"],
+var questions = [
+  "DOM stands for ___",
+  "Javascript is referenced by ___ tag",
+  "A DOM element can be targeted with ___",
+  "___ is a method of taking in user input and displaying it",
+  "Elements can be added to a parent using ___",
 ];
-var correctAnswers = ["me", "ya", "here", "because"];
+var arrOfAnswerChoices = [
+  [
+    "Document Option Base",
+    "Domestic Object Model",
+    "Document Object Model",
+    "Domino Obsessive Mode",
+  ],
+  ["<js>", "<script>", "<javascript>", "<java>"],
+  [
+    "document.getDOM",
+    "document.getElementByIdentification",
+    "document.querySelector",
+    "document.getItem",
+  ],
+  ["DOM Manipulation", "DOM Display", "DOM Input Output", "DOM COM"],
+  [".extend()", ".add()", ".modify()", ".append()"],
+];
+var correctAnswers = [
+  "Document Object Model",
+  "<script>",
+  "document.querySelector",
+  "DOM Manipulation",
+  ".append()"
+];
 
 // sets timeSpan and decrements time by the second
 var interval = setInterval(function () {
@@ -79,10 +102,10 @@ function displayCompletion() {
   nameForm.append(nameInput, nameSubmit);
   quizSection.append(nameForm);
 
-  nameForm.onsubmit = function(){
-    localStorage.setItem("storedName",nameInput.value);
-    localStorage.setItem("storedTime",time);
-  }
+  nameForm.onsubmit = function () {
+    localStorage.setItem("storedName", nameInput.value);
+    localStorage.setItem("storedTime", time);
+  };
 }
 
 // removes used question, answers, and correct answer and clears quizSection
@@ -112,8 +135,7 @@ quizSection.addEventListener("click", function (event) {
 
     // displays quiz completion or loads new question and answers
     questionsAnswered++;
-    if (questionsAnswered === 3) {
-      //*********//
+    if (questionsAnswered === 5) {
       displayCompletion();
     } else {
       setRandomIndex();
