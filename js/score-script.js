@@ -39,10 +39,12 @@ function displayScores() {
   }
 }
 
+// upon clicking 'Go Back'...
 backButt.addEventListener("click", function () {
   location.href = "./index.html";
 });
 
+// upon clicking 'Clear Highscores'...
 clearButt.addEventListener("click", function () {
   if (scoreUl.innerHTML !== "") scoreUl.innerHTML = "";
   localStorage.clear();
